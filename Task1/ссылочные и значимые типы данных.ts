@@ -35,4 +35,4 @@ function copyArray(array: number[]): number[] {
   return result;
 }
 
-// Домашка: разобрать ссылочные функции
+// Домашка: разобрать ссылочные функции123
