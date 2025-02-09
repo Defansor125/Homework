@@ -1,23 +1,22 @@
 // 1 написать функции по вычислению площадей: Квадрат, Треугольник, ромб, круг, трапеция
 
 const side: number = 5;
-const second_side: number = 7;
+const secondSide: number = 7;
 const height: number = 4;
 
-function getSquareArea(side: number): void {
-  let area = side * side;
-  console.log("Площадь квадрата" + area);
+function getSquareArea(side: number): number {
+  return side * side;
 }
 
-getSquareArea(side);
+const area1 = getSquareArea(side);
 
-function getTriangleAreaBySideAndHeight(side: number, height: number): void {
+function getTriangleArea(side: number, height: number): void {
   // ? Уместно ли такое длинное название функции?
   let area = side * 0.5 * height;
   console.log("Triangle area: " + area);
 }
 
-getTriangleAreaBySideAndHeight(side, height);
+getTriangleArea(side, height);
 
 function getRhombusAreaBySideLengthAndHeight(
   side: number,
@@ -45,7 +44,7 @@ function getTrapezoidAreaBy2SidesAndHeight(
   console.log("Trapezoid area: ", area);
 }
 
-getTrapezoidAreaBy2SidesAndHeight(side, second_side, height);
+getTrapezoidAreaBy2SidesAndHeight(side, secondSide, height);
 
 //2 поменять местам
 function swap2VariablesWithThird(var1: any, var2: any): void {
@@ -55,6 +54,10 @@ function swap2VariablesWithThird(var1: any, var2: any): void {
   console.log("Var1: ", var1, "Var2", var2);
 }
 swap2VariablesWithThird("Privet", "Poka");
+
+//
+// let x = 10 = 10 - 2 = 8 =       = 8  = 10 - 8 = 2
+// let y = 2  =        = 2 = 2 + 8 = 10 =        = 10
 
 // 3 поменять без третий, есть вариант через XOR подходит для целых чисел
 function swap2Variables(var1: any, var2: any): void {
@@ -69,9 +72,9 @@ swap2Variables("spasibo", "pojaluysta");
 
 function getSumInRangeLessThanThousand(): void {
   let count: number = 0;
-  for (let index: number = 0; index < 1000; index++) {
-    if (index % 3 === 0 || index % 5 === 0) {
-      count = index + count;
+  for (let i: number = 0; i < 1000; i++) {
+    if (i % 3 === 0 || i % 5 === 0) {
+      count = i + count;
     }
   }
   console.log(count);
@@ -93,22 +96,24 @@ getFactorial(51);
 
 //9 Year
 
-function getYear(year: number): void {
+function isLeapYear(year: number): boolean {
   if (year % 400 === 0) {
     console.log(`Високосный год: ${year} \n кратен 400`);
+    return true;
   }
   if (year % 4 === 0 && year % 100 !== 0) {
     console.log(`Високосный год: ${year}\n кратен 4, но не кратен 100`);
+    return true;
   }
   console.log(`Год: ${year} не является високосным`);
+  return false;
 }
 
-getYear(2021);
+isLeapYear(2021);
 
 // 10 Случайное число
-function getRandomInRange(min: number, max: number): void {
-  let random_number: number = Math.floor(Math.random() * (max - min + 1)) + min;
-  console.log(random_number);
+function getRandomInRange(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 getRandomInRange(1, 100);
@@ -116,9 +121,11 @@ getRandomInRange(1, 100);
 // 11 число в строку и строки в числа
 
 function convertToString(number: number, string: string) {
-  let converted_number: any = number.toString();
-  let converted_string: any = Number(string);
+  const converted_number: string = number.toString();
+  // let converted_number: string = String(number);
+  const converted_string: number = Number(string);
   console.log(+string); // другой способ
+
   console.log(
     `Было: number \n Стало: ${typeof converted_number} \n Было: string \n Стало: ${typeof converted_string}`
   );
@@ -126,41 +133,41 @@ function convertToString(number: number, string: string) {
   console.log(converted_string);
 }
 
-convertToString(5, "10"); // если в строку положить слово, то вернётся NaN
+convertToString(5, "c0"); // если в строку положить слово, то вернётся NaN
 
 //3) Поиск максимального элемента в массиве
+// max = 8
+// [1, 4, 2, 6, 2, 5, 8, 2]
+function findMax(array: number[]): number {
+  let max: number = array[0];
 
-function findBiggestNumberInArray(array: number[]): number {
-  let biggest_value: number = 0;
-  for (let index = 0; index < array.length; index++) {
-    const element = array[index];
-    if (array[index] < array[index + 1]) {
-      biggest_value = array[index + 1];
+  for (let i = 1; i < array.length; i++) {
+    if (array[i] > max) {
+      max = array[i];
     }
   }
-  return biggest_value;
+
+  return max;
 }
 
-findBiggestNumberInArray([1, 2, 5, 2, 3, 6, -1, 2, 121321, 121, -1212]);
+findMax([1, 2, 5, 2, 3, 6, -1, 2, 121321, 121, -1212]);
 
-function findSmallestNumberInArray(array: number[]): number {
-  // очень много времени потратил
-  let smallest_number: number = array[0];
+function findMin(array: number[]): number {
+  let min: number = array[0];
 
-  for (let index = 0; index < array.length; index++) {
-    if (smallest_number > array[index]) {
-      smallest_number = array[index];
+  for (let i = 1; i < array.length; i++) {
+    if (array[i] < min) {
+      min = array[i];
     }
   }
 
-  return smallest_number;
+  return min;
 }
 
 // 4) Найти разность между максимальным и минимальным элементами массива
 
 function getDifferenceMaxAndMinArrayNumber(array: number[]): void {
-  let answer =
-    findBiggestNumberInArray(array) - findSmallestNumberInArray(array);
+  const answer = findMax(array) - findMin(array);
 
   console.log(answer);
 }
@@ -170,3 +177,27 @@ function getDifferenceMaxAndMinArrayNumber(array: number[]): void {
 getDifferenceMaxAndMinArrayNumber([1, 2, 5, 2, 3, 6, 1, 2, 121]);
 
 // 5) Вывести элементы массива, которые больше предыдущего
+// [1, 4, 2, 6, 2, 5, 8, 2]
+
+function getElementBiggerThanPrevious(array: number[]): number[] {
+  let result: number[] = [];
+
+  for (let i: number = 0; i < array.length - 1; i++) {
+    if (array[i] < array[i + 1]) {
+      result.push(array[i + 1]);
+    }
+  }
+  return result;
+
+  // const name: "A" | "B" = "A";
+
+  // if (name === "A") {
+  // } else if (name === "B") {
+  // } else {
+  //   console.log(name.replace());
+  // }
+}
+
+const s: number[] = [1, 2, 1, 0, 5, 3, 8];
+
+console.log(getElementBiggerThanPrevious(s));
