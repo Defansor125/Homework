@@ -37,7 +37,7 @@ function copyArray(array: number[]): number[] {
 
 // Домашка: разобрать стрелочные функции + методы массивов
 
-const array: number[] = [1, 7, 5, 3, 2];
+// const array: number[] = [1, 7, 5, 3, 2];
 
 // !!методы массива Push добавляет в конец массива
 
